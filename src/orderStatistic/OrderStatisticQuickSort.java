@@ -2,10 +2,13 @@ package orderStatistic;
 
 import java.util.Arrays;
 
+// Doesn't work very well -> OrderStatisticThreeWayQuickSort is better
+
 public class OrderStatisticQuickSort {
+	
 	public static void main(String[] args) {
 		int[] array = {1, 5, 65, 65, 232, 43, 76, 53, 70};
-		statisticQuickSort(array, 2, 0, array.length - 1);
+		statisticQuickSort(array, 1, 0, array.length - 1);
 		System.out.println(Arrays.toString(array));
 	}
 
@@ -13,10 +16,15 @@ public class OrderStatisticQuickSort {
 		if (left < right) {
 			int pivotPosition = partition(array, left, right);
 			if (pivotPosition == k - 1) {
-				System.out.println(array[pivotPosition]);
+				System.out.println(k + " statistic order is " + array[pivotPosition]);
+			} else {
+				statisticQuickSort(array, k, left, pivotPosition - 1);
+				statisticQuickSort(array, k, pivotPosition + 1, right);
 			}
-			statisticQuickSort(array, k, left, pivotPosition - 1);
-			statisticQuickSort(array, k, pivotPosition + 1, right);
+		} else {
+			if (k - 1 == left) {
+				System.out.println(k + " statistic order is " + array[left]);
+			}
 		}
 	}
 
